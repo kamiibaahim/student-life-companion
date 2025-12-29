@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do - Student Life Companion</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Student Life</h2>
+            <p>Companion</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">▪</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="todo.html" class="nav-item active">
+                <span class="icon">✓</span>
+                <span>To-Do</span>
+            </a>
+            <a href="study-planner.html" class="nav-item">
+                <span class="icon">◆</span>
+                <span>Study Planner</span>
+            </a>
+            <a href="campus-life.html" class="nav-item">
+                <span class="icon">●</span>
+                <span>Campus Life</span>
+            </a>
+            <a href="mental-health.html" class="nav-item">
+                <span class="icon">◉</span>
+                <span>Mental Health</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="logout-btn">
+                <span class="icon">←</span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <h1>To-Do & Notes</h1>
+                <p>Manage your tasks and keep your notes organized</p>
+            </div>
+            <div class="header-right">
+                <div class="date-info">
+                    <span>Sunday, December 29, 2024</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Task Management Section -->
+        <section class="todo-section">
+            <div class="section-header-todo">
+                <h2>My Tasks</h2>
+                <button class="add-task-btn" onclick="toggleTaskForm()">+ Add Task</button>
+            </div>
+
+            <!-- Add Task Form -->
+            <div class="add-task-form" id="taskForm" style="display: none;">
+                <div class="form-grid">
+                    <input type="text" id="taskTitle" placeholder="Task title" class="task-input">
+                    <input type="text" id="taskDesc" placeholder="Description" class="task-input">
+                    <input type="date" id="taskDate" class="task-input">
+                    <select id="taskPriority" class="task-input">
+                        <option value="low">Low Priority</option>
+                        <option value="medium">Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button onclick="addTask()" class="save-btn">Save Task</button>
+                    <button onclick="toggleTaskForm()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Task Filters -->
+            <div class="task-filters">
+                <button class="filter-btn active" onclick="filterTasks('all')">All Tasks</button>
+                <button class="filter-btn" onclick="filterTasks('active')">Active</button>
+                <button class="filter-btn" onclick="filterTasks('completed')">Completed</button>
+            </div>
+
+            <!-- Tasks List -->
+            <div class="tasks-container">
+                <div class="task-item" data-status="active">
+                    <div class="task-checkbox">
+                        <input type="checkbox" onchange="toggleTaskComplete(this)">
+                    </div>
+                    <div class="task-content">
+                        <h4>Complete Math Assignment</h4>
+                        <p>Calculus Chapter 5 - Due: Dec 30, 2024</p>
+                    </div>
+                    <span class="task-priority high">High</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">×</button>
+                </div>
+
+                <div class="task-item" data-status="completed">
+                    <div class="task-checkbox">
+                        <input type="checkbox" checked onchange="toggleTaskComplete(this)">
+                    </div>
+                    <div class="task-content">
+                        <h4 style="text-decoration: line-through; opacity: 0.6;">Read Programming Chapter</h4>
+                        <p>Object-Oriented Programming concepts</p>
+                    </div>
+                    <span class="task-priority medium">Medium</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">×</button>
+                </div>
+
+                <div class="task-item" data-status="active">
+                    <div class="task-checkbox">
+                        <input type="checkbox" onchange="toggleTaskComplete(this)">
+                    </div>
+                    <div class="task-content">
+                        <h4>Prepare Presentation Slides</h4>
+                        <p>Software Engineering project - Due: Jan 2, 2025</p>
+                    </div>
+                    <span class="task-priority high">High</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">×</button>
+                </div>
+
+                <div class="task-item" data-status="active">
+                    <div class="task-checkbox">
+                        <input type="checkbox" onchange="toggleTaskComplete(this)">
+                    </div>
+                    <div class="task-content">
+                        <h4>Study for Physics Quiz</h4>
+                        <p>Topics: Motion and Forces - Due: Jan 5, 2025</p>
+                    </div>
+                    <span class="task-priority medium">Medium</span>
+                    <button class="delete-btn" onclick="deleteTask(this)">×</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section class="notes-section">
+            <div class="section-header-todo">
+                <h2>My Notes</h2>
+                <button class="add-task-btn" onclick="toggleNoteForm()">+ Add Note</button>
+            </div>
+
+            <!-- Add Note Form -->
+            <div class="add-note-form" id="noteForm" style="display: none;">
+                <input type="text" id="noteTitle" placeholder="Note title" class="note-input">
+                <textarea id="noteContent" placeholder="Write your note here..." class="note-textarea" rows="5"></textarea>
+                <div class="form-actions">
+                    <button onclick="addNote()" class="save-btn">Save Note</button>
+                    <button onclick="toggleNoteForm()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Notes Grid -->
+            <div class="notes-grid">
+                <div class="note-card">
+                    <div class="note-header">
+                        <h3>Important Formulas</h3>
+                        <button class="delete-btn" onclick="deleteNote(this)">×</button>
+                    </div>
+                    <p class="note-content">Quadratic formula: x = (-b ± √(b²-4ac)) / 2a<br>
+                    Distance formula: d = √((x₂-x₁)² + (y₂-y₁)²)<br>
+                    Speed = Distance / Time</p>
+                    <span class="note-date">Dec 28, 2024</span>
+                </div>
+
+                <div class="note-card">
+                    <div class="note-header">
+                        <h3>Programming Concepts</h3>
+                        <button class="delete-btn" onclick="deleteNote(this)">×</button>
+                    </div>
+                    <p class="note-content">OOP Principles: Encapsulation, Inheritance, Polymorphism, Abstraction<br><br>
+                    Remember to practice implementing interfaces and abstract classes.</p>
+                    <span class="note-date">Dec 27, 2024</span>
+                </div>
+
+                <div class="note-card">
+                    <div class="note-header">
+                        <h3>Project Ideas</h3>
+                        <button class="delete-btn" onclick="deleteNote(this)">×</button>
+                    </div>
+                    <p class="note-content">1. Student attendance system<br>
+                    2. Library management app<br>
+                    3. Campus event tracker<br>
+                    4. Study group finder</p>
+                    <span class="note-date">Dec 26, 2024</span>
+                </div>
+
+                <div class="note-card">
+                    <div class="note-header">
+                        <h3>Exam Schedule</h3>
+                        <button class="delete-btn" onclick="deleteNote(this)">×</button>
+                    </div>
+                    <p class="note-content">Math: Jan 10, 9:00 AM<br>
+                    Programming: Jan 12, 2:00 PM<br>
+                    Database: Jan 15, 10:00 AM<br>
+                    English: Jan 18, 1:00 PM</p>
+                    <span class="note-date">Dec 25, 2024</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Task Functions
+        function toggleTaskForm() {
+            const form = document.getElementById('taskForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addTask() {
+            const title = document.getElementById('taskTitle').value;
+            const desc = document.getElementById('taskDesc').value;
+            const date = document.getElementById('taskDate').value;
+            const priority = document.getElementById('taskPriority').value;
+
+            if (!title) {
+                alert('Please enter a task title');
+                return;
+            }
+
+            const tasksContainer = document.querySelector('.tasks-container');
+            const taskItem = document.createElement('div');
+            taskItem.className = 'task-item';
+            taskItem.setAttribute('data-status', 'active');
+            taskItem.innerHTML = `
+                <div class="task-checkbox">
+                    <input type="checkbox" onchange="toggleTaskComplete(this)">
+                </div>
+                <div class="task-content">
+                    <h4>${title}</h4>
+                    <p>${desc}${date ? ' - Due: ' + date : ''}</p>
+                </div>
+                <span class="task-priority ${priority}">${priority.charAt(0).toUpperCase() + priority.slice(1)}</span>
+                <button class="delete-btn" onclick="deleteTask(this)">×</button>
+            `;
+            tasksContainer.insertBefore(taskItem, tasksContainer.firstChild);
+
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDesc').value = '';
+            document.getElementById('taskDate').value = '';
+            document.getElementById('taskPriority').value = 'low';
+            toggleTaskForm();
+        }
+
+        function toggleTaskComplete(checkbox) {
+            const taskItem = checkbox.closest('.task-item');
+            const taskContent = taskItem.querySelector('.task-content h4');
+            if (checkbox.checked) {
+                taskContent.style.textDecoration = 'line-through';
+                taskContent.style.opacity = '0.6';
+                taskItem.setAttribute('data-status', 'completed');
+            } else {
+                taskContent.style.textDecoration = 'none';
+                taskContent.style.opacity = '1';
+                taskItem.setAttribute('data-status', 'active');
+            }
+        }
+
+        function deleteTask(btn) {
+            if (confirm('Are you sure you want to delete this task?')) {
+                btn.closest('.task-item').remove();
+            }
+        }
+
+        function filterTasks(filter) {
+            const tasks = document.querySelectorAll('.task-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            tasks.forEach(task => {
+                if (filter === 'all') {
+                    task.style.display = 'flex';
+                } else {
+                    task.style.display = task.getAttribute('data-status') === filter ? 'flex' : 'none';
+                }
+            });
+        }
+
+        // Note Functions
+        function toggleNoteForm() {
+            const form = document.getElementById('noteForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addNote() {
+            const title = document.getElementById('noteTitle').value;
+            const content = document.getElementById('noteContent').value;
+
+            if (!title || !content) {
+                alert('Please enter both title and content');
+                return;
+            }
+
+            const notesGrid = document.querySelector('.notes-grid');
+            const noteCard = document.createElement('div');
+            noteCard.className = 'note-card';
+            const today = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            noteCard.innerHTML = `
+                <div class="note-header">
+                    <h3>${title}</h3>
+                    <button class="delete-btn" onclick="deleteNote(this)">×</button>
+                </div>
+                <p class="note-content">${content}</p>
+                <span class="note-date">${today}</span>
+            `;
+            notesGrid.insertBefore(noteCard, notesGrid.firstChild);
+
+            document.getElementById('noteTitle').value = '';
+            document.getElementById('noteContent').value = '';
+            toggleNoteForm();
+        }
+
+        function deleteNote(btn) {
+            if (confirm('Are you sure you want to delete this note?')) {
+                btn.closest('.note-card').remove();
+            }
+        }
+    </script>
+</body>
+</html>

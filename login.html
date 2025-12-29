@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Student Life Companion</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Login Page Specific Styles */
+        .login-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-page::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+
+        .login-page::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 900px;
+            min-height: 600px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sidebar Panel that moves */
+        .login-sidebar {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.8s ease-in-out;
+            z-index: 0;
+            left: 0;
+        }
+
+        .login-container.signup-mode .login-sidebar {
+            transform: translateX(100%);
+        }
+
+        .login-sidebar h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-sidebar p {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .login-sidebar .features-list {
+            margin-top: 2rem;
+        }
+
+        .login-sidebar .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-sidebar .feature-item .icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Forms Container */
+        .forms-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+.login-form-container,
+.signup-form-container {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    padding: 18.5rem 3rem 3rem; /* ⬅️ top padding increased */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 3;
+}
+
+
+        .login-form-container {
+            right: 0;
+            opacity: 1;
+        }
+
+        .signup-form-container {
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-container.signup-mode .login-form-container {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-container.signup-mode .signup-form-container {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .auth-form {
+            width: 100%;
+        }
+.login-form-container,
+.signup-form-container {
+    z-index: 3;
+}
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .switch-form p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .switch-form button {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.95rem;
+            padding: 0;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-home a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+            }
+
+            .login-sidebar {
+                position: relative;
+                width: 100%;
+                transform: none !important;
+            }
+
+            .login-form-container,
+            .signup-form-container {
+                position: relative;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-page">
+        <div class="login-container" id="container">
+            <!-- Moving Sidebar Panel -->
+            <div class="login-sidebar">
+                <h2>Welcome to Student Life Companion</h2>
+                <p>Your complete platform for managing university life, staying organized, and achieving academic success.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item">
+                        <div class="icon">✓</div>
+                        <span>Organize tasks & deadlines</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">✓</div>
+                        <span>Plan your studies effectively</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">✓</div>
+                        <span>Track campus activities</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">✓</div>
+                        <span>Maintain mental wellness</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Forms Container -->
+            <div class="forms-container">
+                <!-- Login Form (Right Side Initially) -->
+                <div class="login-form-container">
+                    <div class="form-header">
+                        <h1>Login</h1>
+                        <p>Welcome back! Please login to your account</p>
+                    </div>
+
+                    <div class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email-input">Email Address</label>
+                            <input type="email" id="login-email-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password-input">Password</label>
+                            <input type="password" id="login-password-input" placeholder="Enter your password">
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#">Forgot Password?</a>
+                        </div>
+                        <a href="dashboard/dashboard.html" class="submit-btn">Login</a>
+                    </div>
+
+                    <div class="switch-form">
+                        <p>Don't have an account? <button id="show-signup">Sign Up</button></p>
+                    </div>
+
+                    <div class="back-home">
+                        <a href="index.html">Back to Home</a>
+                    </div>
+                </div>
+
+                <!-- Signup Form (Left Side Initially Hidden) -->
+                <div class="signup-form-container">
+                    <div class="form-header">
+                        <h1>Sign Up</h1>
+                        <p>Create your account to get started</p>
+                    </div>
+
+                    <div class="auth-form">
+                        <div class="form-group">
+                            <label for="signup-name-input">Full Name</label>
+                            <input type="text" id="signup-name-input" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-email-input">Email Address</label>
+                            <input type="email" id="signup-email-input" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password-input">Password</label>
+                            <input type="password" id="signup-password-input" placeholder="Create a password">
+                        </div>
+                        <a href="dashboard/dashboard.html" class="submit-btn">Sign Up</a>
+                    </div>
+
+                    <div class="switch-form">
+                        <p>Already have an account? <button id="show-login">Login</button></p>
+                    </div>
+
+                    <div class="back-home">
+                        <a href="index.html">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const showSignup = document.getElementById('show-signup');
+        const showLogin = document.getElementById('show-login');
+
+        showSignup.addEventListener('click', () => {
+            container.classList.add('signup-mode');
+        });
+
+        showLogin.addEventListener('click', () => {
+            container.classList.remove('signup-mode');
+        });
+    </script>
+</body>
+</html>

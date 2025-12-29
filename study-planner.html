@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - Student Life Companion</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Student Life</h2>
+            <p>Companion</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">▪</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="todo.html" class="nav-item">
+                <span class="icon">✓</span>
+                <span>To-Do</span>
+            </a>
+            <a href="study-planner.html" class="nav-item active">
+                <span class="icon">◆</span>
+                <span>Study Planner</span>
+            </a>
+            <a href="campus-life.html" class="nav-item">
+                <span class="icon">●</span>
+                <span>Campus Life</span>
+            </a>
+            <a href="mental-health.html" class="nav-item">
+                <span class="icon">◉</span>
+                <span>Mental Health</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="logout-btn">
+                <span class="icon">←</span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <h1>Study Planner</h1>
+                <p>Organize your study schedule and track your subjects</p>
+            </div>
+            <div class="header-right">
+                <div class="date-info">
+                    <span>Sunday, December 29, 2024</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- My Subjects Section -->
+        <section class="subjects-section">
+            <div class="section-header-planner">
+                <h2>My Subjects</h2>
+                <button class="add-subject-btn" onclick="toggleSubjectForm()">+ Add Subject</button>
+            </div>
+
+            <!-- Add Subject Form -->
+            <div class="add-subject-form" id="subjectForm" style="display: none;">
+                <div class="form-grid-planner">
+                    <input type="text" id="subjectName" placeholder="Subject Name" class="planner-input">
+                    <input type="text" id="subjectCode" placeholder="Subject Code" class="planner-input">
+                    <input type="text" id="instructor" placeholder="Instructor Name" class="planner-input">
+                    <input type="number" id="creditHours" placeholder="Credit Hours" class="planner-input" min="1" max="6">
+                </div>
+                <div class="form-actions">
+                    <button onclick="addSubject()" class="save-btn">Save Subject</button>
+                    <button onclick="toggleSubjectForm()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Subjects Grid -->
+            <div class="subjects-grid">
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>Programming Fundamentals</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> CS-101</p>
+                        <p><strong>Instructor:</strong> Dr. Ahmed Khan</p>
+                        <p><strong>Credits:</strong> 3</p>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>Calculus I</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> MATH-101</p>
+                        <p><strong>Instructor:</strong> Prof. Sarah Ali</p>
+                        <p><strong>Credits:</strong> 3</p>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>Database Systems</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> CS-201</p>
+                        <p><strong>Instructor:</strong> Dr. Usman Malik</p>
+                        <p><strong>Credits:</strong> 4</p>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>English Composition</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> ENG-101</p>
+                        <p><strong>Instructor:</strong> Ms. Fatima Noor</p>
+                        <p><strong>Credits:</strong> 3</p>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>Physics I</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> PHY-101</p>
+                        <p><strong>Instructor:</strong> Dr. Hassan Raza</p>
+                        <p><strong>Credits:</strong> 3</p>
+                    </div>
+                </div>
+
+                <div class="subject-card">
+                    <div class="subject-header">
+                        <h3>Data Structures</h3>
+                        <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                    </div>
+                    <div class="subject-details">
+                        <p><strong>Code:</strong> CS-202</p>
+                        <p><strong>Instructor:</strong> Dr. Ali Raza</p>
+                        <p><strong>Credits:</strong> 4</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weekly Study Schedule -->
+        <section class="schedule-section">
+            <div class="section-header-planner">
+                <h2>Weekly Study Schedule</h2>
+                <button class="add-subject-btn" onclick="toggleScheduleForm()">+ Add Session</button>
+            </div>
+
+            <!-- Add Schedule Form -->
+            <div class="add-schedule-form" id="scheduleForm" style="display: none;">
+                <div class="form-grid-planner">
+                    <select id="scheduleDay" class="planner-input">
+                        <option value="">Select Day</option>
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                        <option value="Sunday">Sunday</option>
+                    </select>
+                    <input type="text" id="scheduleSubject" placeholder="Subject" class="planner-input">
+                    <input type="time" id="scheduleTime" class="planner-input">
+                    <input type="text" id="scheduleDuration" placeholder="Duration (e.g., 2 hours)" class="planner-input">
+                </div>
+                <div class="form-actions">
+                    <button onclick="addSchedule()" class="save-btn">Save Session</button>
+                    <button onclick="toggleScheduleForm()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Schedule Table -->
+            <div class="schedule-table-container">
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Subject</th>
+                            <th>Time</th>
+                            <th>Duration</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scheduleTableBody">
+                        <tr>
+                            <td><strong>Monday</strong></td>
+                            <td>Programming Fundamentals</td>
+                            <td>09:00 AM</td>
+                            <td>2 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monday</strong></td>
+                            <td>Calculus I</td>
+                            <td>02:00 PM</td>
+                            <td>1.5 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tuesday</strong></td>
+                            <td>Database Systems</td>
+                            <td>10:00 AM</td>
+                            <td>2 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wednesday</strong></td>
+                            <td>English Composition</td>
+                            <td>01:00 PM</td>
+                            <td>1 hour</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wednesday</strong></td>
+                            <td>Physics I</td>
+                            <td>03:00 PM</td>
+                            <td>2 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thursday</strong></td>
+                            <td>Data Structures</td>
+                            <td>09:00 AM</td>
+                            <td>2.5 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Friday</strong></td>
+                            <td>Programming Lab Practice</td>
+                            <td>11:00 AM</td>
+                            <td>3 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Saturday</strong></td>
+                            <td>Revision - All Subjects</td>
+                            <td>10:00 AM</td>
+                            <td>4 hours</td>
+                            <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Study Goals -->
+        <section class="goals-section">
+            <div class="section-header-planner">
+                <h2>Study Goals This Week</h2>
+            </div>
+
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <div class="goal-icon">◆</div>
+                    <h3>Complete 3 Assignments</h3>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 66%;"></div>
+                        </div>
+                        <span class="progress-text">2 of 3 completed</span>
+                    </div>
+                </div>
+
+                <div class="goal-card">
+                    <div class="goal-icon">◆</div>
+                    <h3>Study 20 Hours</h3>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">15 of 20 hours</span>
+                    </div>
+                </div>
+
+                <div class="goal-card">
+                    <div class="goal-icon">◆</div>
+                    <h3>Finish 2 Book Chapters</h3>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">1 of 2 completed</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Subject Functions
+        function toggleSubjectForm() {
+            const form = document.getElementById('subjectForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addSubject() {
+            const name = document.getElementById('subjectName').value;
+            const code = document.getElementById('subjectCode').value;
+            const instructor = document.getElementById('instructor').value;
+            const credits = document.getElementById('creditHours').value;
+
+            if (!name || !code) {
+                alert('Please enter subject name and code');
+                return;
+            }
+
+            const grid = document.querySelector('.subjects-grid');
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.innerHTML = `
+                <div class="subject-header">
+                    <h3>${name}</h3>
+                    <button class="delete-btn-small" onclick="deleteSubject(this)">×</button>
+                </div>
+                <div class="subject-details">
+                    <p><strong>Code:</strong> ${code}</p>
+                    <p><strong>Instructor:</strong> ${instructor || 'N/A'}</p>
+                    <p><strong>Credits:</strong> ${credits || 'N/A'}</p>
+                </div>
+            `;
+            grid.appendChild(card);
+
+            document.getElementById('subjectName').value = '';
+            document.getElementById('subjectCode').value = '';
+            document.getElementById('instructor').value = '';
+            document.getElementById('creditHours').value = '';
+            toggleSubjectForm();
+        }
+
+        function deleteSubject(btn) {
+            if (confirm('Are you sure you want to delete this subject?')) {
+                btn.closest('.subject-card').remove();
+            }
+        }
+
+        // Schedule Functions
+        function toggleScheduleForm() {
+            const form = document.getElementById('scheduleForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function addSchedule() {
+            const day = document.getElementById('scheduleDay').value;
+            const subject = document.getElementById('scheduleSubject').value;
+            const time = document.getElementById('scheduleTime').value;
+            const duration = document.getElementById('scheduleDuration').value;
+
+            if (!day || !subject || !time) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const tbody = document.getElementById('scheduleTableBody');
+            const row = document.createElement('tr');
+            
+            // Convert 24h time to 12h format
+            const timeFormatted = new Date('2000-01-01 ' + time).toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: true 
+            });
+
+            row.innerHTML = `
+                <td><strong>${day}</strong></td>
+                <td>${subject}</td>
+                <td>${timeFormatted}</td>
+                <td>${duration}</td>
+                <td><button class="delete-btn-table" onclick="deleteSchedule(this)">×</button></td>
+            `;
+            tbody.appendChild(row);
+
+            document.getElementById('scheduleDay').value = '';
+            document.getElementById('scheduleSubject').value = '';
+            document.getElementById('scheduleTime').value = '';
+            document.getElementById('scheduleDuration').value = '';
+            toggleScheduleForm();
+        }
+
+        function deleteSchedule(btn) {
+            if (confirm('Are you sure you want to delete this schedule?')) {
+                btn.closest('tr').remove();
+            }
+        }
+    </script>
+</body>
+</html>

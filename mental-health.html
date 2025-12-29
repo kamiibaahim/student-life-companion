@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health - Student Life Companion</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Student Life</h2>
+            <p>Companion</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <span class="icon">▪</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="todo.html" class="nav-item">
+                <span class="icon">✓</span>
+                <span>To-Do</span>
+            </a>
+            <a href="study-planner.html" class="nav-item">
+                <span class="icon">◆</span>
+                <span>Study Planner</span>
+            </a>
+            <a href="campus-life.html" class="nav-item">
+                <span class="icon">●</span>
+                <span>Campus Life</span>
+            </a>
+            <a href="mental-health.html" class="nav-item active">
+                <span class="icon">◉</span>
+                <span>Mental Health</span>
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <a href="../index.html" class="logout-btn">
+                <span class="icon">←</span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <h1>Mental Health & Wellness</h1>
+                <p>Your wellbeing matters 💚</p>
+            </div>
+            <div class="header-right">
+                <div class="date-info">
+                    <span>Sunday, December 29, 2024</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quote of the Day Section -->
+        <section class="quote-of-day-section">
+            <div class="quote-badge">✨ Quote of the Day</div>
+            <div class="quote-content" id="quoteContent">
+                <p class="quote-text">"Believe you can and you're halfway there."</p>
+                <p class="quote-author">- Theodore Roosevelt</p>
+            </div>
+        </section>
+
+        <!-- Mood Tracker & Quote Generator -->
+        <div class="mood-quote-container">
+            <!-- Mood Tracker -->
+            <section class="mood-tracker-section">
+                <h2>How are you feeling today?</h2>
+                <p class="mood-subtitle">Select your mood to get personalized quotes</p>
+                
+                <div class="mood-selector-grid">
+                    <button class="mood-option" onclick="selectMood('happy', '😊')">
+                        <span class="mood-emoji-large">😊</span>
+                        <span class="mood-label-large">Happy</span>
+                    </button>
+                    <button class="mood-option" onclick="selectMood('neutral', '😐')">
+                        <span class="mood-emoji-large">😐</span>
+                        <span class="mood-label-large">Neutral</span>
+                    </button>
+                    <button class="mood-option" onclick="selectMood('sad', '😟')">
+                        <span class="mood-emoji-large">😟</span>
+                        <span class="mood-label-large">Sad</span>
+                    </button>
+                    <button class="mood-option" onclick="selectMood('stressed', '😰')">
+                        <span class="mood-emoji-large">😰</span>
+                        <span class="mood-label-large">Stressed</span>
+                    </button>
+                    <button class="mood-option" onclick="selectMood('anxious', '😟')">
+                        <span class="mood-emoji-large">😟</span>
+                        <span class="mood-label-large">Anxious</span>
+                    </button>
+                </div>
+
+                <div class="selected-mood" id="selectedMood" style="display: none;">
+                    <p>Your mood: <span id="currentMoodEmoji"></span> <span id="currentMoodText"></span></p>
+                </div>
+            </section>
+
+            <!-- Quote Generator -->
+            <section class="quote-generator-section">
+                <h2>Generate Inspiring Quote</h2>
+                <p class="quote-gen-subtitle">Click to get a quote based on your mood</p>
+                
+                <div class="quote-display" id="generatedQuote">
+                    <div class="quote-placeholder">
+                        <span class="placeholder-icon">💭</span>
+                        <p>Select your mood and generate a quote!</p>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="generateBtn" onclick="generateQuote()">
+                    <span>✨</span> Generate Quote
+                </button>
+            </section>
+        </div>
+
+        <!-- Quick Relaxation Tips -->
+        <section class="relaxation-section">
+            <div class="section-header-mental">
+                <h2>Quick Relaxation Tips</h2>
+                <span class="tips-badge">Try Now</span>
+            </div>
+            
+            <div class="relaxation-grid">
+                <div class="relaxation-card">
+                    <div class="relaxation-icon">🫁</div>
+                    <h3>Deep Breathing</h3>
+                    <p class="relaxation-desc">4-7-8 Breathing Technique</p>
+                    <ul class="relaxation-steps">
+                        <li>Breathe in for 4 seconds</li>
+                        <li>Hold breath for 7 seconds</li>
+                        <li>Exhale slowly for 8 seconds</li>
+                        <li>Repeat 3-4 times</li>
+                    </ul>
+                    <div class="duration-badge">⏱️ 2 minutes</div>
+                </div>
+
+                <div class="relaxation-card">
+                    <div class="relaxation-icon">🧘</div>
+                    <h3>5-Minute Meditation</h3>
+                    <p class="relaxation-desc">Quick mindfulness practice</p>
+                    <ul class="relaxation-steps">
+                        <li>Find a quiet comfortable spot</li>
+                        <li>Close your eyes gently</li>
+                        <li>Focus on your breathing</li>
+                        <li>Let thoughts pass without judgment</li>
+                    </ul>
+                    <div class="duration-badge">⏱️ 5 minutes</div>
+                </div>
+
+                <div class="relaxation-card">
+                    <div class="relaxation-icon">💪</div>
+                    <h3>Progressive Relaxation</h3>
+                    <p class="relaxation-desc">Release muscle tension</p>
+                    <ul class="relaxation-steps">
+                        <li>Tense feet muscles for 5 seconds</li>
+                        <li>Release and relax</li>
+                        <li>Move up through body groups</li>
+                        <li>End with facial muscles</li>
+                    </ul>
+                    <div class="duration-badge">⏱️ 10 minutes</div>
+                </div>
+
+                <div class="relaxation-card">
+                    <div class="relaxation-icon">🎵</div>
+                    <h3>Calming Music</h3>
+                    <p class="relaxation-desc">Stress relief through sound</p>
+                    <ul class="relaxation-steps">
+                        <li>Put on headphones</li>
+                        <li>Play soft instrumental music</li>
+                        <li>Close your eyes and listen</li>
+                        <li>Let the music wash over you</li>
+                    </ul>
+                    <div class="duration-badge">⏱️ 5-15 minutes</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mood History Tracker -->
+        <section class="mood-history-section">
+            <div class="section-header-mental">
+                <h2>Your Mood This Week</h2>
+                <span class="history-badge">7 days tracked</span>
+            </div>
+            
+            <div class="mood-timeline">
+                <div class="mood-day-item">
+                    <span class="day-name">Mon</span>
+                    <span class="day-mood-emoji">😊</span>
+                    <span class="day-date">Dec 23</span>
+                </div>
+                <div class="mood-day-item">
+                    <span class="day-name">Tue</span>
+                    <span class="day-mood-emoji">🙂</span>
+                    <span class="day-date">Dec 24</span>
+                </div>
+                <div class="mood-day-item">
+                    <span class="day-name">Wed</span>
+                    <span class="day-mood-emoji">😐</span>
+                    <span class="day-date">Dec 25</span>
+                </div>
+                <div class="mood-day-item">
+                    <span class="day-name">Thu</span>
+                    <span class="day-mood-emoji">🙂</span>
+                    <span class="day-date">Dec 26</span>
+                </div>
+                <div class="mood-day-item">
+                    <span class="day-name">Fri</span>
+                    <span class="day-mood-emoji">😊</span>
+                    <span class="day-date">Dec 27</span>
+                </div>
+                <div class="mood-day-item">
+                    <span class="day-name">Sat</span>
+                    <span class="day-mood-emoji">😊</span>
+                    <span class="day-date">Dec 28</span>
+                </div>
+                <div class="mood-day-item active">
+                    <span class="day-name">Sun</span>
+                    <span class="day-mood-emoji">?</span>
+                    <span class="day-date">Today</span>
+                </div>
+            </div>
+
+            <div class="mood-insights">
+                <div class="insight-card">
+                    <span class="insight-icon">📊</span>
+                    <div class="insight-content">
+                        <h4>Weekly Summary</h4>
+                        <p>You had 4 happy days this week! Keep up the positive energy! 🌟</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Counseling Services -->
+        <section class="counseling-section">
+            <div class="section-header-mental">
+                <h2>Resources & Support</h2>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Individual Counseling</h3>
+                    <p>One-on-one sessions with licensed counselors for personal mental health support.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ Mon-Fri: 9AM-5PM</span>
+                        <span class="service-contact">📧 counseling@university.edu</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👥</div>
+                    <h3>Group Therapy</h3>
+                    <p>Join supportive group sessions focused on anxiety, depression, and stress management.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ Tue & Thu: 3PM-4PM</span>
+                        <span class="service-contact">📧 groups@university.edu</span>
+                    </div>
+                </div>
+
+                <div class="service-card crisis">
+                    <div class="service-icon">🆘</div>
+                    <h3>Crisis Support</h3>
+                    <p>24/7 immediate support for students experiencing mental health emergencies.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ 24/7 Available</span>
+                        <span class="service-contact">📞 Emergency: (555) 123-4567</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💊</div>
+                    <h3>Psychiatric Services</h3>
+                    <p>Medication evaluation and management with certified psychiatrists.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ By Appointment</span>
+                        <span class="service-contact">📧 psychiatry@university.edu</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📚</div>
+                    <h3>Self-Help Resources</h3>
+                    <p>Access articles, worksheets, and guided exercises for mental wellness.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ Available 24/7</span>
+                        <span class="service-contact">🌐 wellness.university.edu</span>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📞</div>
+                    <h3>Crisis Helplines</h3>
+                    <p>National and local helplines for immediate mental health support.</p>
+                    <div class="service-meta">
+                        <span class="service-time">⏰ 24/7 Available</span>
+                        <span class="service-contact">📞 988 Suicide & Crisis Lifeline</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Quote Database organized by mood
+        const quotes = {
+            happy: [
+                { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
+                { text: "The best way to cheer yourself up is to try to cheer somebody else up.", author: "Mark Twain" },
+                { text: "Happiness is not something ready made. It comes from your own actions.", author: "Dalai Lama" },
+                { text: "The purpose of our lives is to be happy.", author: "Dalai Lama" },
+                { text: "Success is not the key to happiness. Happiness is the key to success.", author: "Albert Schweitzer" }
+            ],
+            neutral: [
+                { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+                { text: "Life is 10% what happens to you and 90% how you react to it.", author: "Charles R. Swindoll" },
+                { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
+                { text: "Small progress is still progress.", author: "Unknown" },
+                { text: "Every moment is a fresh beginning.", author: "T.S. Eliot" }
+            ],
+            sad: [
+                { text: "Every storm runs out of rain. Keep going, brighter days are coming.", author: "Unknown" },
+                { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" },
+                { text: "This too shall pass. Nothing lasts forever, not even your troubles.", author: "Unknown" },
+                { text: "It's okay to not be okay. Healing takes time.", author: "Unknown" },
+                { text: "Stars can't shine without darkness.", author: "Unknown" }
+            ],
+            stressed: [
+                { text: "You don't have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },
+                { text: "One small positive thought can change your whole day.", author: "Unknown" },
+                { text: "Breathe. It's just a bad day, not a bad life.", author: "Unknown" },
+                { text: "Take a deep breath. It's just a chapter, not your whole story.", author: "Unknown" },
+                { text: "Calm mind brings inner strength and self-confidence.", author: "Dalai Lama" }
+            ],
+            anxious: [
+                { text: "Anxiety does not empty tomorrow of its sorrows, but only empties today of its strength.", author: "Charles Spurgeon" },
+                { text: "You are not your anxiety. You are the sky. Anxiety is just the weather.", author: "Matt Haig" },
+                { text: "Nothing can bring you peace but yourself.", author: "Ralph Waldo Emerson" },
+                { text: "Feel the fear and do it anyway.", author: "Susan Jeffers" },
+                { text: "Worrying is like a rocking chair. It gives you something to do but doesn't get you anywhere.", author: "Van Wilder" }
+            ]
+        };
+
+        let currentMood = '';
+        let usedQuotes = [];
+
+        function selectMood(mood, emoji) {
+            currentMood = mood;
+            usedQuotes = []; // Reset used quotes when mood changes
+            
+            // Update selected mood display
+            document.getElementById('currentMoodEmoji').textContent = emoji;
+            document.getElementById('currentMoodText').textContent = mood.charAt(0).toUpperCase() + mood.slice(1);
+            document.getElementById('selectedMood').style.display = 'block';
+            
+            // Highlight selected mood button
+            document.querySelectorAll('.mood-option').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.closest('.mood-option').classList.add('selected');
+            
+            // Update generate button
+            document.getElementById('generateBtn').disabled = false;
+            
+            // Auto-generate first quote
+            generateQuote();
+        }
+
+        function generateQuote() {
+            if (!currentMood) {
+                alert('Please select your mood first! 😊');
+                return;
+            }
+            
+            const moodQuotes = quotes[currentMood];
+            
+            // If all quotes have been used, reset
+            if (usedQuotes.length === moodQuotes.length) {
+                usedQuotes = [];
+            }
+            
+            // Find unused quote
+            let availableQuotes = moodQuotes.filter((_, index) => !usedQuotes.includes(index));
+            let randomIndex = Math.floor(Math.random() * availableQuotes.length);
+            let selectedQuote = availableQuotes[randomIndex];
+            
+            // Mark as used
+            let originalIndex = moodQuotes.indexOf(selectedQuote);
+            usedQuotes.push(originalIndex);
+            
+            // Display quote with animation
+            const quoteDisplay = document.getElementById('generatedQuote');
+            quoteDisplay.style.opacity = '0';
+            
+            setTimeout(() => {
+                quoteDisplay.innerHTML = `
+                    <div class="quote-result">
+                        <p class="generated-quote-text">"${selectedQuote.text}"</p>
+                        <p class="generated-quote-author">- ${selectedQuote.author}</p>
+                    </div>
+                `;
+                quoteDisplay.style.opacity = '1';
+            }, 200);
+        }
+
+        // Initialize quote of the day (random from happy quotes)
+        window.onload = function() {
+            const dailyQuote = quotes.happy[Math.floor(Math.random() * quotes.happy.length)];
+            // Quote is already set in HTML, but you can make it dynamic here if needed
+        };
+    </script>
+</body>
+</html>
